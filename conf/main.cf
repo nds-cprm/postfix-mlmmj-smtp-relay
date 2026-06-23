@@ -1,0 +1,26 @@
+relayhost = [smtp.gmail.com]:587
+compatibility_level=3.6
+
+maillog_file = /dev/stdout
+mynetworks = 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+smtpd_relay_restrictions = permit_mynetworks, reject
+
+# SASL
+# smtp_sasl_auth_enable = yes
+# smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+
+# TLS
+smtp_tls_security_level = encrypt
+smtp_tls_loglevel = 1
+smtp_tls_CAfile = /etc/ssl/certs/GlobalSign_Root_CA_-_R3.pem
+
+# Força o Postfix a enviar apenas uma mensagem por conexão SMTP
+#default_destination_recipient_limit = 1
+
+# Garante que ele faça apenas 1 conexão simultânea com o Gmail
+#smtp_destination_concurrency_limit = 1
+#smtp_initial_destination_concurrency = 1
+
+# Define o atraso entre cada envio (Exemplo: 6s = 10 emails por minuto)
+#smtp_destination_rate_delay = 6s
