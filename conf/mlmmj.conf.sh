@@ -10,9 +10,11 @@ chmod -R 770 /var/spool/mlmmj
 
 chown mlmmj:mlmmj /var/spool/mlmmj
 
+#
 # create example list, ( must repeat for each list )
-
-mlmmj-make-ml -L /var/spool/mlmmj/mylist -c mlmmj:mlmmj
+#
+# mlmmj-make-ml -L mylist -s /var/spool/mlmmj -c mlmmj:mlmmj -a
+#
 
 # Configure postfix
 
@@ -89,11 +91,10 @@ virtual_alias_maps = pcre:/var/spool/mlmmj/virtual.pcre
 
 EOT
 
-# restart
+# remaps
 
 postmap /var/spool/mlmmj/transport
 
 postmap /var/spool/mlmmj/virtual
 
-systemctl reload postfix
 

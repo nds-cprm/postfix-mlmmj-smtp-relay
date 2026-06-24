@@ -24,3 +24,4 @@ smtp_tls_CAfile = /etc/ssl/certs/GlobalSign_Root_CA_-_R3.pem
 
 # Define o atraso entre cada envio (Exemplo: 6s = 10 emails por minuto)
 #smtp_destination_rate_delay = 6s
+

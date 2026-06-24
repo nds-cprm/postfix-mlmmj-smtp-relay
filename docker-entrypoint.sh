@@ -21,7 +21,7 @@ postconf -e "compatibility_level=3.6" \
     "relayhost = $_RELAY_SERVER" \
     "maillog_file = /dev/stdout" \
     "smtp_sasl_auth_enable = yes" \
-    "smtp_sasl_password_maps = hash:$SASL_PASSWD_FILE"
+    "smtp_sasl_password_maps = lmdb:$SASL_PASSWD_FILE"
 
 # Gera o banco de dados de autenticação criptografado
 postmap $SASL_PASSWD_FILE

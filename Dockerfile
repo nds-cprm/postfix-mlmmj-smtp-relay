@@ -12,9 +12,19 @@ RUN apt-get update && \
     apt-get autoremove && \
     rm -rf /varlib/apt/lists/* 
 
-COPY docker-entrypoint.sh /
+COPY --chmod=0644 ./conf/main.cf /etc/postfix
 
-RUN chmod +x /docker-entrypoint.sh
+COPY --chmod=0644 ./conf/master.cf /etc/postfix
+
+COPY --chmod=0755 ./conf/mlmmj.conf.sh .
+
+ENV  MYDOMAIN=mydomain.com
+
+RUN  /mlmmj.conf.sh
+
+RUN  rm mlmmj.conf.sh
+
+COPY --chmod=0750 ./docker-entrypoint.sh /
 
 ENV RELAY_HOST=smtp.gmail.com \
     RELAY_PORT=587 \
@@ -23,3 +33,4 @@ ENV RELAY_HOST=smtp.gmail.com \
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD ["postfix", "start-fg"]
+
